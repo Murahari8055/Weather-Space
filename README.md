@@ -73,7 +73,6 @@ Weather-Space/
 
 **Murahari Battu**
 
-💼 Full Stack Developer
+💼 Software Developer
 
-📧 Contact:[*Linkedin*](https://www.linkedin.com/in/murahari18/)
-.
+📧 Contact: [*Linkedin*](https://www.linkedin.com/in/murahari18/).
