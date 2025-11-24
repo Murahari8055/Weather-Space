@@ -1,0 +1,3 @@
+[submodule "frontend/weather-space-frontend"]
+	path = frontend/weather-space-frontend
+	url = https://github.com/Murahari8055/Weather-Space.git
