@@ -1,0 +1,48 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <h1>User Profile</h1>
+    <p>View your account information</p>
+  </div>
+
+  <div class="profile-content">
+    <div class="profile-picture-section">
+      <h3>Profile Picture</h3>
+      <div class="profile-picture-container">
+        <div class="profile-picture" *ngIf="currentUser.profilePictureUrl">
+          <img [src]="currentUser.profilePictureUrl" alt="Profile Picture">
+        </div>
+        <div class="profile-picture-placeholder" *ngIf="!currentUser.profilePictureUrl">
+          <span>{{ currentUser.username?.charAt(0)?.toUpperCase() || 'U' }}</span>
+        </div>
+        <div class="picture-upload">
+          <input
+            type="file"
+            id="profilePictureInput"
+            (change)="onFileSelected($event)"
+            accept="image/*"
+            style="display: none;">
+          <label for="profilePictureInput" class="upload-btn">
+            <span *ngIf="!currentUser.profilePictureUrl">Upload Picture</span>
+            <span *ngIf="currentUser.profilePictureUrl">Change Picture</span>
+          </label>
+          <!-- Removed edit picture button as per request -->
+          <button class="remove-picture-btn" (click)="removeProfilePicture()">
+            Remove Picture
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="user-info-section">
+      <h3>User Information</h3>
+      <div class="info-item">
+        <label>Username:</label>
+        <span>{{ currentUser.username }}</span>
+      </div>
+      <div class="info-item">
+        <label>Email:</label>
+        <span>{{ currentUser.email }}</span>
+      </div>
+    </div>
+  </div>
+</div>

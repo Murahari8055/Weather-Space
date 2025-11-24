@@ -1,0 +1,114 @@
+<video id="weather-life-background-video" class="background-video hidden" autoplay loop muted></video>
+
+<div class="weather-life-container">
+  <h1>Weather Life</h1>
+  <p>Discover how weather impacts our daily lives and activities.</p>
+
+  <!-- Social Feed Section -->
+  <div class="social-feed-section" *ngIf="authService.isAuthenticated()">
+    <div class="feed-header">
+      <h2>Weather Social Feed</h2>
+      <button class="create-post-btn" (click)="navigateToCreatePost()">📝 Create Post</button>
+    </div>
+
+    <!-- Quick Weather Context -->
+    <div class="weather-context">
+      <div class="current-weather-info">
+        <h3>Current Weather: {{ currentWeather }}</h3>
+        <p>Share your thoughts about today's weather!</p>
+      </div>
+    </div>
+
+    <!-- Posts Feed -->
+    <div class="posts-feed">
+      <div class="post-card" *ngFor="let post of posts">
+        <div class="post-header">
+          <div class="user-info">
+            <span class="username">{{ post.user.username }}</span>
+            <span class="post-time">{{ post.createdAt | date:'short' }}</span>
+          </div>
+          <div class="weather-tag" *ngIf="post.weatherContext">
+            {{ post.weatherContext }}
+          </div>
+        </div>
+
+        <div class="post-content">
+          <p>{{ post.content }}</p>
+          <div class="post-media" *ngIf="post.mediaUrl">
+            <img [src]="post.mediaUrl" alt="Post media" *ngIf="isImage(post.mediaUrl)">
+            <video [src]="post.mediaUrl" controls *ngIf="isVideo(post.mediaUrl)"></video>
+          </div>
+        </div>
+
+        <div class="post-actions">
+          <button class="action-btn like-btn" (click)="toggleLike(post)">
+            ❤️ Like
+          </button>
+          <button class="action-btn comment-btn" (click)="toggleComments(post)">
+            💬 {{ post.comments?.length || 0 }}
+          </button>
+          <button class="action-btn share-btn" (click)="sharePost(post)">
+            🔗 Share
+          </button>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="comments-section" *ngIf="post.showComments">
+          <div class="comment" *ngFor="let comment of post.comments">
+            <div class="comment-user">{{ comment.user.username }}</div>
+            <div class="comment-content">{{ comment.content }}</div>
+            <div class="comment-time">{{ comment.createdAt | date:'short' }}</div>
+          </div>
+
+          <div class="add-comment">
+            <input
+              type="text"
+              [(ngModel)]="newComment"
+              placeholder="Write a comment..."
+              (keyup.enter)="addComment(post)">
+            <button (click)="addComment(post)">Post</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="load-more" *ngIf="hasMorePosts">
+        <button class="load-more-btn" (click)="loadMorePosts()">Load More Posts</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Guest Access Section -->
+  <div class="guest-section" *ngIf="!authService.isAuthenticated()">
+    <div class="guest-content">
+      <h2>Join the Weather Community</h2>
+      <p>Sign up to share your weather experiences, connect with others, and discover weather-related posts from around the world.</p>
+      <div class="guest-actions">
+        <button class="signup-btn" (click)="navigateToLogin()">Sign Up / Login</button>
+        <button class="explore-btn" (click)="navigateToPosts()">Explore Posts</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Weather Tips for Guests -->
+  <div class="weather-life-content" *ngIf="!authService.isAuthenticated()">
+    <div class="weather-tip">
+      <h3>🌞 Sunny Days</h3>
+      <p>Perfect for outdoor activities, picnics, and beach trips. Don't forget sunscreen!</p>
+    </div>
+
+    <div class="weather-tip">
+      <h3>🌧️ Rainy Days</h3>
+      <p>Great for indoor activities, reading, or enjoying a warm cup of coffee by the window.</p>
+    </div>
+
+    <div class="weather-tip">
+      <h3>❄️ Winter Weather</h3>
+      <p>Time for cozy sweaters, hot chocolate, and winter sports. Stay warm and safe!</p>
+    </div>
+
+    <div class="weather-tip">
+      <h3>🌪️ Stormy Weather</h3>
+      <p>Stay indoors, keep emergency supplies ready, and enjoy the dramatic sky show from safety.</p>
+    </div>
+  </div>
+</div>

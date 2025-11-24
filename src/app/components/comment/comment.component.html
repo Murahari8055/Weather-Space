@@ -1,0 +1,38 @@
+<div class="comments-section">
+  <h4>Comments ({{ comments.length }})</h4>
+
+  <form *ngIf="authService.isAuthenticated()" [formGroup]="commentForm" (ngSubmit)="onSubmit()" class="comment-form">
+    <textarea
+      formControlName="content"
+      placeholder="Add a comment..."
+      rows="2"
+      maxlength="200"
+    ></textarea>
+    <button type="submit" [disabled]="!commentForm.valid" class="comment-submit">Comment</button>
+  </form>
+
+  <p *ngIf="!authService.isAuthenticated()" class="login-prompt">
+    <a href="#" (click)="authService.logout()">Login</a> to comment
+  </p>
+
+  <div *ngIf="loading" class="loading">Loading comments...</div>
+
+  <div class="comments-list" *ngIf="!loading">
+    <div class="comment" *ngFor="let comment of comments">
+      <div class="comment-header">
+        <span class="comment-username">{{ comment.user.username }}</span>
+        <span class="comment-timestamp">{{ comment.createdAt | date:'short' }}</span>
+        <button
+          *ngIf="canDeleteComment(comment)"
+          (click)="deleteComment(comment.id)"
+          class="delete-comment"
+        >
+          ×
+        </button>
+      </div>
+      <p class="comment-content">{{ comment.content }}</p>
+    </div>
+
+    <p *ngIf="comments.length === 0" class="no-comments">No comments yet. Be the first to comment!</p>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>{{ isLoginMode ? 'Login' : 'Register' }}</h2>
+
+    <div *ngIf="errorMessage" [class]="errorMessage.includes('successful') ? 'success-message' : 'error-message'">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Login Form -->
+    <form *ngIf="isLoginMode" [formGroup]="loginForm" (ngSubmit)="onLogin()" class="auth-form">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" formControlName="password" required>
+      </div>
+
+      <button type="submit" [disabled]="!loginForm.valid" class="auth-button">Login</button>
+    </form>
+
+    <!-- Register Form -->
+    <form *ngIf="!isLoginMode" [formGroup]="registerForm" (ngSubmit)="onRegister()" class="auth-form">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" formControlName="username" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" formControlName="password" required>
+      </div>
+
+      <button type="submit" [disabled]="!registerForm.valid" class="auth-button">Register</button>
+    </form>
+
+    <p class="toggle-mode">
+      {{ isLoginMode ? "Don't have an account?" : "Already have an account?" }}
+      <button type="button" (click)="toggleMode()" class="link-button">
+        {{ isLoginMode ? 'Register' : 'Login' }}
+      </button>
+    </p>
+  </div>
+</div>

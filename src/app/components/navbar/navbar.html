@@ -1,0 +1,25 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-left">
+      <span class="navbar-brand">🌦️ Weather Space</span>
+    </div>
+    <div class="navbar-right">
+      <button class="nav-link" (click)="navigateToHome()">Home</button>
+      <button class="nav-link" (click)="navigateToWeatherLife()">Weather Life</button>
+      <button class="nav-link" *ngIf="authService.isAuthenticated()" (click)="router.navigate(['/create-post'])">Create Post</button>
+      <button class="nav-link" *ngIf="authService.isAuthenticated()" (click)="router.navigate(['/posts'])">Posts</button>
+      <div class="user-menu" *ngIf="authService.isAuthenticated()">
+        <button class="nav-link user-button" (click)="toggleUserMenu()">
+          👤 {{ getCurrentUsername() }}
+        </button>
+        <div class="user-dropdown" [class.show]="showUserMenu">
+          <button class="dropdown-item" (click)="navigateToProfile()">Profile</button>
+          <button class="dropdown-item" (click)="logout()">Logout</button>
+        </div>
+      </div>
+      <div *ngIf="!authService.isAuthenticated()" class="auth-buttons">
+        <button class="nav-link login-btn" (click)="router.navigate(['/login'])">Login</button>
+      </div>
+    </div>
+  </div>
+</nav>
