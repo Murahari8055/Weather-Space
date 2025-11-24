@@ -72,6 +72,8 @@ Weather-Space/
 ## 🙋‍♂️ Author
 
 **Murahari Battu**
+
 💼 Full Stack Developer
-📧 Contact:[ *(your email or LinkedIn link)*](https://www.linkedin.com/in/murahari18/)
+
+📧 Contact:[ *(linkedin](https://www.linkedin.com/in/murahari18/)
 .
