@@ -75,5 +75,5 @@ Weather-Space/
 
 💼 Full Stack Developer
 
-📧 Contact:[ *(linkedin](https://www.linkedin.com/in/murahari18/)
+📧 Contact:[*Linkedin*](https://www.linkedin.com/in/murahari18/)
 .
