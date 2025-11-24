@@ -1,0 +1,14 @@
+# Ignore Windows Installer files
+*.msi
+
+# Ignore test files
+test.txt
+test_image.txt
+
+# Ignore backend secret keys and logs if outside backend .gitignore
+backend/weather.pem
+backend/backend.log
+backend/log.txt
+
+# Ignore node_modules in frontend if not already covered in nested .gitignore
+frontend/weather-space-frontend/node_modules/
